@@ -20,7 +20,7 @@ interface Request {
 const CreateMessageService = async ({
   messageData
 }: Request): Promise<Message> => {
-  await Message.upsert(messageData);
+  await Message.upsert(messageData as any);
 
   const message = await Message.findByPk(messageData.id, {
     include: [
@@ -29,7 +29,8 @@ const CreateMessageService = async ({
         model: Ticket,
         as: "ticket",
         include: [
-          "contact", "queue",
+          "contact",
+          "queue",
           {
             model: Whatsapp,
             as: "whatsapp",

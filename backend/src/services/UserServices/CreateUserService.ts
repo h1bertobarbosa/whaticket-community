@@ -49,8 +49,8 @@ const CreateUserService = async ({
 
   try {
     await schema.validate({ email, password, name });
-  } catch (err) {
-    throw new AppError(err.message);
+  } catch (err: any) {
+    throw new AppError(err?.message);
   }
 
   const user = await User.create(
@@ -59,8 +59,8 @@ const CreateUserService = async ({
       password,
       name,
       profile,
-      whatsappId: whatsappId ? whatsappId : null
-    },
+      whatsappId: whatsappId || null
+    } as any,
     { include: ["queues", "whatsapp"] }
   );
 

@@ -55,11 +55,11 @@ const CreateQueueService = async (queueData: QueueData): Promise<Queue> => {
 
   try {
     await queueSchema.validate({ color, name });
-  } catch (err) {
-    throw new AppError(err.message);
+  } catch (err: any) {
+    throw new AppError(err?.message);
   }
 
-  const queue = await Queue.create(queueData);
+  const queue = await Queue.create(queueData as any);
 
   return queue;
 };

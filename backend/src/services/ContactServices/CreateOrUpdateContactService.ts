@@ -45,7 +45,7 @@ const CreateOrUpdateContactService = async ({
       email,
       isGroup,
       extraInfo
-    });
+    } as any);
 
     io.emit("contact", {
       action: "create",

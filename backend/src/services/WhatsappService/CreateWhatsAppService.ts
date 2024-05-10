@@ -46,8 +46,8 @@ const CreateWhatsAppService = async ({
 
   try {
     await schema.validate({ name, status, isDefault });
-  } catch (err) {
-    throw new AppError(err.message);
+  } catch (err: any) {
+    throw new AppError(err?.message);
   }
 
   const whatsappFound = await Whatsapp.findOne();
@@ -76,7 +76,7 @@ const CreateWhatsAppService = async ({
       greetingMessage,
       farewellMessage,
       isDefault
-    },
+    } as any,
     { include: ["queues"] }
   );
 
